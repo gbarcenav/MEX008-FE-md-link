@@ -1,4 +1,31 @@
 {
   "name": "md-links",
-  "version": "0.1.0"
+  "version": "0.1.0",
+  "description": "Lee y analiza archivos markdown, verifica los links que contiene y reporta estadísticas",
+  "license": "",
+  "repository": "gbarcenav/MEX008-FE-md-link",
+  "author": {
+    "name": "Gabriela Bárcena Villanueva",
+    "email": "g.barcena.v@gmail.com"
+  },
+  "bin": "cli.js",
+  "engines": {
+    "node": "v10.16.0"
+  },
+  "scripts": {},
+  "files": [
+    "index.js",
+    "cli.js"
+  ],
+  "keywords": [
+    "cli-app",
+    "cli",
+    "bin",
+    "array",
+    "links",
+    "markdown"
+  ],
+  "dependencies": {
+    "markdown-it": "^9.1.0"
+  }
 }
