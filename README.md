@@ -67,6 +67,10 @@ MIT © [gbarcenav](https://github.com/gbarcenav)
 
 ---
 
+## Diagrama de flujo
+
+![diagrama de flujo](./img/diagrama_flujo.jpeg)
+
 # Markdown Links
 
 ## Índice
