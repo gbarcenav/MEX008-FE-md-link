@@ -1,19 +1,88 @@
 # Markdown Links
 
+Lee y analiza archivos markdown, verifica los links que contiene y reporta estadísticas
+
+## Instalación
+
+```Bash
+$ npm install --global gbarcenav/md-links
+```
+
+## Uso
+
+```javascript
+const mdLinks = require("md-links");
+
+// Caso 1 .- Ruta relativa sin options
+mdLinks("./some/example.md")
+  .then(links => {
+    // => [{ href, text, file }]
+  })
+  .catch(console.error);
+
+// Caso  .- Ruta relativa con option (validate)
+mdLinks("./some/example.md", { validate: true })
+  .then(links => {
+    // => [{ href, text, file, status, ok }]
+  })
+  .catch(console.error);
+
+// Caso 3 .- Ruta relativa de un directorio sin options
+mdLinks("./some/dir")
+  .then(links => {
+    // => [{ href, text, file }]
+  })
+  .catch(console.error);
+
+//PD: Pueden presentarse más casos.
+```
+
+## CLI
+
+```Bash
+$ npm  install --global mdlinks-gbvins
+```
+
+```Bash
+Ejemplos
+
+    $ md-links --validate
+    ./some/example.md http://algo.com/2/3/ ok 200 Link a algo
+    ./some/example.md https://otra-cosa.net/algun-doc.html fail 404 algún doc
+    ./some/example.md http://google.com/ ok 301 Google
+
+    $ mdlink-insp --stats
+    Total: 3
+    Unique: 3
+
+    $ md-links ./some/example.md --stats --validate
+    Total: 3
+    Unique: 3
+    Broken: 1
+```
+
+## License
+
+MIT © [gbarcenav](https://github.com/gbarcenav)
+
+---
+
+# Markdown Links
+
 ## Índice
 
-* [1. Preámbulo](#1-preámbulo)
-* [2. Resumen del proyecto](#2-resumen-del-proyecto)
-* [3. Objetivos de aprendizaje](#3-objetivos-de-aprendizaje)
-* [4. Consideraciones generales](#4-consideraciones-generales)
-* [5. Criterios de aceptación mínimos del proyecto](#5-criterios-de-aceptación-mínimos-del-proyecto)
-* [6. Entregables](#6-entregables)
-* [7. Hacker edition](#7-hacker-edition)
-* [8. Evaluación](#8-evaluación)
-* [9. Pistas, tips y lecturas complementarias](#9-pistas-tips-y-lecturas-complementarias)
-* [10. Checklist](#10-checklist)
+- [1. Preámbulo](#1-preámbulo)
+- [2. Resumen del proyecto](#2-resumen-del-proyecto)
+- [3. Objetivos de aprendizaje](#3-objetivos-de-aprendizaje)
+- [4. Consideraciones generales](#4-consideraciones-generales)
+- [5. Criterios de aceptación mínimos del proyecto](#5-criterios-de-aceptación-mínimos-del-proyecto)
+- [6. Entregables](#6-entregables)
+- [7. Hacker edition](#7-hacker-edition)
+- [8. Evaluación](#8-evaluación)
+- [9. Pistas, tips y lecturas complementarias](#9-pistas-tips-y-lecturas-complementarias)
+- [10. Checklist](#10-checklist)
 
-***
+---
 
 ## 1. Preámbulo
 
@@ -103,19 +172,19 @@ ayudaran a organizar y priorizar su trabajo.
 
 ### Archivos del proyecto
 
-* `README.md` con descripción del módulo, instrucciones de instalación/uso,
+- `README.md` con descripción del módulo, instrucciones de instalación/uso,
   documentación del API y ejemplos. Todo lo relevante para que cualquier
   developer que quiera usar tu librería pueda hacerlo sin inconvenientes.
-* `index.js`: Desde este archivo debes exportar una función (`mdLinks`).
-* `package.json` con nombre, versión, descripción, autores, licencia,
+- `index.js`: Desde este archivo debes exportar una función (`mdLinks`).
+- `package.json` con nombre, versión, descripción, autores, licencia,
   dependencias, scripts (pretest, test, ...)
-* `.editorconfig` con configuración para editores de texto. Este archivo no se
+- `.editorconfig` con configuración para editores de texto. Este archivo no se
   debe cambiar.
-* `.eslintrc` con configuración para linter. Este archivo no
+- `.eslintrc` con configuración para linter. Este archivo no
   se debe cambiar.
-* `.gitignore` para ignorar `node_modules` u otras carpetas que no deban
+- `.gitignore` para ignorar `node_modules` u otras carpetas que no deban
   incluirse en control de versiones (`git`).
-* `test/md-links.spec.js` debe contener los tests unitarios para la función
+- `test/md-links.spec.js` debe contener los tests unitarios para la función
   `mdLinks()`. Tu inplementación debe pasar estos tets.
 
 ### JavaScript API
@@ -127,10 +196,10 @@ siguiente interfaz:
 
 ##### Argumentos
 
-* `path`: Ruta absoluta o relativa al archivo o directorio. Si la ruta pasada es
+- `path`: Ruta absoluta o relativa al archivo o directorio. Si la ruta pasada es
   relativa, debe resolverse como relativa al directorio desde donde se invoca
   node - _current working directory_).
-* `options`: Un objeto con las siguientes propiedades:
+- `options`: Un objeto con las siguientes propiedades:
   - `validate`: Booleano que determina si se desea validar los links
     encontrados.
 
@@ -140,9 +209,9 @@ La función debe retornar una promesa (`Promise`) que resuelva a un arreglo
 (`Array`) de objetos (`Object`), donde cada objeto representa un link y contiene
 las siguientes propiedades:
 
-* `href`: URL encontrada.
-* `text`: Texto que aparecía dentro del link (`<a>`).
-* `file`: Ruta del archivo donde se encontró el link.
+- `href`: URL encontrada.
+- `text`: Texto que aparecía dentro del link (`<a>`).
+- `file`: Ruta del archivo donde se encontró el link.
 
 #### Ejemplo
 
@@ -249,10 +318,10 @@ Las secciones llamadas _Hacker Edition_ son **opcionales**. Si **terminaste**
 con todo lo anterior y te queda tiempo, intenta completarlas. Así podrás
 profundizar y/o ejercitar más sobre los objetivos de aprendizaje del proyecto.
 
-* Puedes agregar la propiedad `line` a cada objeto `link` indicando en qué línea
+- Puedes agregar la propiedad `line` a cada objeto `link` indicando en qué línea
   del archivo se encontró el link.
-* Puedes agregar más estadísticas.
-* Integración continua con Travis o Circle CI.
+- Puedes agregar más estadísticas.
+- Integración continua con Travis o Circle CI.
 
 ## 8. Evaluación
 
@@ -266,8 +335,8 @@ proyectos de tus compañeras a lo largo del Bootcamp para ir viendo tu evolució
 
 ### Habilidades Blandas (Soft Skills)
 
-| Habilidad                                       | 
-|-------------------------------------------------|
+| Habilidad                                       |
+| ----------------------------------------------- |
 | Planificación, organización y manejo del tiempo |
 | Autoaprendizaje                                 |
 | Presentaciones                                  |
@@ -279,20 +348,20 @@ proyectos de tus compañeras a lo largo del Bootcamp para ir viendo tu evolució
 
 ### Habilidades Técnicas (Front-end)
 
-| Habilidad                       | 
-| --------------------------------|
-| **Computer Science (CS)**       |
-| Lógica / Algoritmia             |
-| Arquitectura                    |
-| **Source Code Management (SCM)**|
-| Git                             |
-| GitHub                          |
-| **JavaScript**                  |
-| Estilo (linter js)              |
-| Nomenclatura / semántica        |
-| Uso de funciones / modularidad  |
-| Estructuras de datos            |
-| Tests                           |
+| Habilidad                        |
+| -------------------------------- |
+| **Computer Science (CS)**        |
+| Lógica / Algoritmia              |
+| Arquitectura                     |
+| **Source Code Management (SCM)** |
+| Git                              |
+| GitHub                           |
+| **JavaScript**                   |
+| Estilo (linter js)               |
+| Nomenclatura / semántica         |
+| Uso de funciones / modularidad   |
+| Estructuras de datos             |
+| Tests                            |
 
 Recuerda revisar la rúbrica y de acuerdo a tus alcances en proyectos anteriores busca tu crecimiento personal.
 
@@ -304,16 +373,15 @@ Recuerda revisar la rúbrica y de acuerdo a tus alcances en proyectos anteriores
 
 Para que el módulo sea instalable desde GitHub solo tiene que:
 
-* Estar en un repo público de GitHub
-* Contener un `package.json` válido
+- Estar en un repo público de GitHub
+- Contener un `package.json` válido
 
 Con el comando `npm install githubname/reponame` podemos instalar directamente
 desde GitHub. Ver [docs oficiales de `npm install` acá](https://docs.npmjs.com/cli/install).
 
 Por ejemplo, el [`course-parser`](https://github.com/Laboratoria/course-parser)
 que usamos para la currícula no está publicado en el registro público de NPM,
-así que lo instalamos directamente desde GitHub con el comando `npm install
-Laboratoria/course-parser`.
+así que lo instalamos directamente desde GitHub con el comando `npm install Laboratoria/course-parser`.
 
 ### Sugerencias de implementación
 
@@ -325,16 +393,16 @@ tanto usando librerías como implementando en VanillaJS.
 Por poner un ejemplo, el _parseado_ (análisis) del markdown para extraer los
 links podría plantearse de las siguientes maneras (todas válidas):
 
-* Usando un _módulo_ como [markdown-it](https://github.com/markdown-it/markdown-it),
+- Usando un _módulo_ como [markdown-it](https://github.com/markdown-it/markdown-it),
   que nos devuelve un arreglo de _tokens_ que podemos recorrer para identificar
   los links.
-* Siguiendo otro camino completamente, podríamos usar
+- Siguiendo otro camino completamente, podríamos usar
   [expresiones regulares (`RegExp`)](https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Regular_Expressions).
-* También podríamos usar una combinación de varios _módulos_ (podría ser válido
+- También podríamos usar una combinación de varios _módulos_ (podría ser válido
   transformar el markdown a HTML usando algo como [marked](https://github.com/markedjs/marked)
   y de ahí extraer los link con una librería de DOM como [JSDOM](https://github.com/jsdom/jsdom)
   o [Cheerio](https://github.com/cheeriojs/cheerio) entre otras).
-* Usando un _custom renderer_ de [marked](https://github.com/markedjs/marked)
+- Usando un _custom renderer_ de [marked](https://github.com/markedjs/marked)
   (`new marked.Renderer()`).
 
 No dudes en consultar a tus compañeras, coaches y/o el [foro de la comunidad](http://community.laboratoria.la/c/js)
@@ -343,30 +411,30 @@ si tienes dudas existenciales con respecto a estas decisiones. No existe una
 
 ### Tutoriales / NodeSchool workshoppers
 
-* [learnyounode](https://github.com/workshopper/learnyounode)
-* [how-to-npm](https://github.com/workshopper/how-to-npm)
-* [promise-it-wont-hurt](https://github.com/stevekane/promise-it-wont-hurt)
+- [learnyounode](https://github.com/workshopper/learnyounode)
+- [how-to-npm](https://github.com/workshopper/how-to-npm)
+- [promise-it-wont-hurt](https://github.com/stevekane/promise-it-wont-hurt)
 
 ### Otros recursos
 
-* [Acerca de Node.js - Documentación oficial](https://nodejs.org/es/about/)
-* [Node.js file system - Documentación oficial](https://nodejs.org/api/fs.html)
-* [Node.js http.get - Documentación oficial](https://nodejs.org/api/http.html#http_http_get_options_callback)
-* [Node.js - Wikipedia](https://es.wikipedia.org/wiki/Node.js)
-* [What exactly is Node.js? - freeCodeCamp](https://medium.freecodecamp.org/what-exactly-is-node-js-ae36e97449f5)
-* [¿Qué es Node.js y para qué sirve? - drauta.com](https://www.drauta.com/que-es-nodejs-y-para-que-sirve)
-* [¿Qué es Nodejs? Javascript en el Servidor - Fazt en YouTube](https://www.youtube.com/watch?v=WgSc1nv_4Gw)
-* [¿Simplemente qué es Node.js? - IBM Developer Works, 2011](https://www.ibm.com/developerworks/ssa/opensource/library/os-nodejs/index.html)
-* [Node.js y npm](https://www.genbeta.com/desarrollo/node-js-y-npm)
-* [Módulos, librerías, paquetes, frameworks... ¿cuál es la diferencia?](http://community.laboratoria.la/t/modulos-librerias-paquetes-frameworks-cual-es-la-diferencia/175)
-* [Asíncronía en js](https://carlosazaustre.com/manejando-la-asincronia-en-javascript/)
-* [NPM](https://docs.npmjs.com/getting-started/what-is-npm)
-* [Publicar packpage](https://docs.npmjs.com/getting-started/publishing-npm-packages)
-* [Crear módulos en Node.js](https://docs.npmjs.com/getting-started/publishing-npm-packages)
-* [Leer un archivo](https://nodejs.org/api/fs.html#fs_fs_readfile_path_options_callback)
-* [Leer un directorio](https://nodejs.org/api/fs.html#fs_fs_readdir_path_options_callback)
-* [Path](https://nodejs.org/api/path.html)
-* [Linea de comando CLI](https://medium.com/netscape/a-guide-to-create-a-nodejs-command-line-package-c2166ad0452e)
+- [Acerca de Node.js - Documentación oficial](https://nodejs.org/es/about/)
+- [Node.js file system - Documentación oficial](https://nodejs.org/api/fs.html)
+- [Node.js http.get - Documentación oficial](https://nodejs.org/api/http.html#http_http_get_options_callback)
+- [Node.js - Wikipedia](https://es.wikipedia.org/wiki/Node.js)
+- [What exactly is Node.js? - freeCodeCamp](https://medium.freecodecamp.org/what-exactly-is-node-js-ae36e97449f5)
+- [¿Qué es Node.js y para qué sirve? - drauta.com](https://www.drauta.com/que-es-nodejs-y-para-que-sirve)
+- [¿Qué es Nodejs? Javascript en el Servidor - Fazt en YouTube](https://www.youtube.com/watch?v=WgSc1nv_4Gw)
+- [¿Simplemente qué es Node.js? - IBM Developer Works, 2011](https://www.ibm.com/developerworks/ssa/opensource/library/os-nodejs/index.html)
+- [Node.js y npm](https://www.genbeta.com/desarrollo/node-js-y-npm)
+- [Módulos, librerías, paquetes, frameworks... ¿cuál es la diferencia?](http://community.laboratoria.la/t/modulos-librerias-paquetes-frameworks-cual-es-la-diferencia/175)
+- [Asíncronía en js](https://carlosazaustre.com/manejando-la-asincronia-en-javascript/)
+- [NPM](https://docs.npmjs.com/getting-started/what-is-npm)
+- [Publicar packpage](https://docs.npmjs.com/getting-started/publishing-npm-packages)
+- [Crear módulos en Node.js](https://docs.npmjs.com/getting-started/publishing-npm-packages)
+- [Leer un archivo](https://nodejs.org/api/fs.html#fs_fs_readfile_path_options_callback)
+- [Leer un directorio](https://nodejs.org/api/fs.html#fs_fs_readdir_path_options_callback)
+- [Path](https://nodejs.org/api/path.html)
+- [Linea de comando CLI](https://medium.com/netscape/a-guide-to-create-a-nodejs-command-line-package-c2166ad0452e)
 
 ## 10. Checklist
 
@@ -376,10 +444,10 @@ si tienes dudas existenciales con respecto a estas decisiones. No existe una
 
 ### `README.md`
 
-- [ ] Colocar el pseudo código o diagrama de flujo con el algoritmo que soluciona el problema.
-- [ ] Un board con el backlog para la implementación de la librería.
-- [ ] Documentación técnica de la librería.
-- [ ] Guía de uso e instalación de la librería
+- [x] Colocar el pseudo código o diagrama de flujo con el algoritmo que soluciona el problema.
+- [x] Un board con el backlog para la implementación de la librería.
+- [x] Documentación técnica de la librería.
+- [x] Guía de uso e instalación de la librería
 
 ### API `mdLinks(path, opts)`
 
