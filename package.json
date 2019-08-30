@@ -8,7 +8,9 @@
     "name": "Gabriela Bárcena Villanueva",
     "email": "g.barcena.v@gmail.com"
   },
-  "bin": "./cli.js",
+  "bin": {
+    "md-link": "./cli.js"
+  },
   "engines": {
     "node": "v10.16.0"
   },
