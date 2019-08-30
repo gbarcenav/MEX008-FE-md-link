@@ -1,26 +1,46 @@
-# Markdow Links
+# Markdown Links
 
 Lee y analiza archivos markdown, verifica los links que contiene y reporta estadísticas
 
 ## Instalación
 
 ```Bash
-$ npm install --save md-links
+$ npm install --global gbarcenav/md-links
 ```
 
 ## Uso
 
 ```javascript
-const mdLinks = require();
+const mdLinks = require("md-links");
 
-mdLinks.();
-//=> ""
+// Caso 1 .- Ruta relativa sin options
+mdLinks("./some/example.md")
+  .then(links => {
+    // => [{ href, text, file }]
+  })
+  .catch(console.error);
+
+// Caso  .- Ruta relativa con option (validate)
+mdLinks("./some/example.md", { validate: true })
+  .then(links => {
+    // => [{ href, text, file, status, ok }]
+  })
+  .catch(console.error);
+
+// Caso 3 .- Ruta relativa de un directorio sin options
+mdLinks("./some/dir")
+  .then(links => {
+    // => [{ href, text, file }]
+  })
+  .catch(console.error);
+
+//PD: Pueden presentarse más casos.
 ```
 
 ## CLI
 
 ```Bash
-$ npm  install --global mdlink-insp
+$ npm  install --global mdlinks-gbvins
 ```
 
 ```Bash
@@ -424,10 +444,10 @@ si tienes dudas existenciales con respecto a estas decisiones. No existe una
 
 ### `README.md`
 
-- [ ] Colocar el pseudo código o diagrama de flujo con el algoritmo que soluciona el problema.
-- [ ] Un board con el backlog para la implementación de la librería.
-- [ ] Documentación técnica de la librería.
-- [ ] Guía de uso e instalación de la librería
+- [x] Colocar el pseudo código o diagrama de flujo con el algoritmo que soluciona el problema.
+- [x] Un board con el backlog para la implementación de la librería.
+- [x] Documentación técnica de la librería.
+- [x] Guía de uso e instalación de la librería
 
 ### API `mdLinks(path, opts)`
 

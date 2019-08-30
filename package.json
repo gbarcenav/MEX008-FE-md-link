@@ -1,14 +1,14 @@
 {
-  "name": "md-links",
+  "name": "mdlinks-gbvins",
   "version": "0.1.0",
   "description": "Lee y analiza archivos markdown, verifica los links que contiene y reporta estadísticas",
-  "license": "",
+  "license": "MIT",
   "repository": "gbarcenav/MEX008-FE-md-link",
   "author": {
     "name": "Gabriela Bárcena Villanueva",
     "email": "g.barcena.v@gmail.com"
   },
-  "bin": "cli.js",
+  "bin": "./cli.js",
   "engines": {
     "node": "v10.16.0"
   },
